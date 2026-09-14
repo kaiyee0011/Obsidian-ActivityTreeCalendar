@@ -1,0 +1,19 @@
+# Editors
+.vscode/
+.idea/
+*.iml
+
+# Dependencies
+node_modules/
+
+# Build artifacts are uploaded to GitHub Releases.
+main.js
+*.map
+
+# Local plugin data
+data.json
+
+# macOS
+.DS_Store
+
+PRODUCT.md
