@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.5.1
+## 1.0.0
 
 - Add a monochrome monthly activity heatmap with week numbers.
 - Show edited Markdown files in a collapsible, path-compressed folder tree.
