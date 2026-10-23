@@ -1,17 +1,19 @@
-## Activity Tree Calendar 1.0.0
+## Activity Tree Calendar 1.1.0
 
-The first public release.
+The calendar now reliably returns to today when opened, and the README includes an automatically updated download history chart.
 
-### Features
+### Calendar improvements
 
-- Monthly activity heatmap with week numbers
-- Click a date to view and open edited Markdown files
-- Collapsible folder tree with compressed folder paths
-- Configurable heat threshold, defaulting to 10 files
-- Automatic Chinese and English localization
-- Responsive light and dark themes
-- Local-only storage with no network requests
+- Opening the calendar from the ribbon or command palette selects today and displays the current month, even when reusing an existing view.
+- When today is selected, the calendar follows the new local day after midnight and refreshes when the app regains focus after sleep.
+- Manually selected historical dates remain selected during activity updates and date rollover, including selections made just after midnight.
 
-On first run, existing notes are indexed by their latest modified date. Afterward, the plugin records Markdown file creation and modification events while enabled. Heat intensity represents the number of distinct files associated with each day.
+### Download history
+
+- Add a handwritten SVG chart to the English and Chinese READMEs.
+- Collect official Obsidian download statistics daily through GitHub Actions, with support for manual updates.
+- Include the maintainer-provided release baseline of 0 downloads on September 14, 2026.
+
+Download statistics are collected by the repository workflow. The plugin continues to store activity locally without making network requests.
 
 Requires Obsidian 1.7.2 or later.
