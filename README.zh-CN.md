@@ -61,6 +61,8 @@ Activity Tree Calendar 将保存在本地的编辑记录转换为月度热力图
 
 使用左右按钮切换月份，点击日期筛选文件树，再点击文件标题即可打开笔记。
 
+从功能区图标或命令面板打开日历时，会自动显示当月并选中**今天**。日历保持打开时，如果当前选中的是今天，跨天后会跟随到新一天；手动浏览历史日期时会保留所选日期。
+
 ## 设置
 
 进入 **设置 → 第三方插件 → Activity Tree Calendar**。
@@ -108,15 +110,14 @@ npm run dev
 ```bash
 npm run build
 npm run lint
+npm test
 ```
 
-## 发布
+## 下载历史
 
-GitHub Release 标签需要与插件版本完全一致，不添加 `v` 前缀。上传以下文件：
+[![Activity Tree Calendar 下载历史](assets/download-history-chart.svg)](https://community.obsidian.md/plugins/activity-tree-calendar)
 
-- `main.js`
-- `manifest.json`
-- `styles.css`
+每天记录 [Obsidian 官方统计](https://raw.githubusercontent.com/obsidianmd/obsidian-releases/master/community-plugin-stats.json)中的累计下载量，采集日期使用 UTC。发布起点由作者提供：**2026 年 9 月 14 日，下载量为 0**。
 
 ## 许可证
 

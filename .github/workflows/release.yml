@@ -28,6 +28,7 @@ jobs:
         run: |
           npm run build
           npm run lint
+          npm test
 
       - name: Verify tag matches manifest
         run: |

@@ -1,0 +1,55 @@
+name: Update download history
+
+on:
+  schedule:
+    # 01:23 UTC / 09:23 Asia/Shanghai, away from the top of the hour.
+    - cron: '23 1 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: download-history
+  cancel-in-progress: false
+
+jobs:
+  update:
+    # Always update the default branch, including manual runs.
+    if: github.repository == 'kaiyee0011/Obsidian-ActivityTreeCalendar'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out default branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify updater and calendar behavior
+        run: npm test
+
+      - name: Collect official statistics and render chart
+        run: npm run update-downloads
+
+      - name: Commit updated snapshots and chart
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/download-history.json assets/download-history-chart.svg
+          if git diff --cached --quiet; then
+            echo 'Download history is already up to date.'
+            exit 0
+          fi
+          git commit -m 'docs: update Obsidian download history'
+          git push origin "HEAD:$DEFAULT_BRANCH"

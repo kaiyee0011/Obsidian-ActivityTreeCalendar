@@ -82,6 +82,7 @@ export default class ActivityTreeCalendarPlugin extends Plugin {
 			if (!leaf) return;
 			await leaf.setViewState({ type: VIEW_TYPE_ACTIVITY_TREE, active: true });
 		}
+		if (leaf.view instanceof ActivityTreeView) leaf.view.showToday();
 		await this.app.workspace.revealLeaf(leaf);
 	}
 }

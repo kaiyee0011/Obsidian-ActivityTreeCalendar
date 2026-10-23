@@ -11,6 +11,7 @@ export const VIEW_TYPE_ACTIVITY_TREE = 'activity-tree-calendar-view';
 export class ActivityTreeView extends ItemView {
 	private selectedDay = dayKey();
 	private monthTimestamp = moment().startOf('month').valueOf();
+	private currentDay = this.selectedDay;
 
 	constructor(
 		leaf: WorkspaceLeaf,
@@ -32,12 +33,30 @@ export class ActivityTreeView extends ItemView {
 	}
 
 	async onOpen(): Promise<void> {
-		this.render();
+		this.showToday();
+		const refreshOnDayChange = () => {
+			if (dayKey() !== this.currentDay) this.refresh();
+		};
+		this.registerInterval(window.setInterval(refreshOnDayChange, 60_000));
+		this.registerDomEvent(window, 'focus', refreshOnDayChange);
 	}
 
 	async onClose(): Promise<void> {}
 
 	refresh(): void {
+		const today = dayKey();
+		if (today !== this.currentDay && this.selectedDay === this.currentDay) {
+			this.showToday();
+			return;
+		}
+		this.currentDay = today;
+		this.render();
+	}
+
+	showToday(): void {
+		this.selectedDay = dayKey();
+		this.currentDay = this.selectedDay;
+		this.monthTimestamp = moment(this.selectedDay, DAY_FORMAT).startOf('month').valueOf();
 		this.render();
 	}
 
@@ -108,6 +127,7 @@ export class ActivityTreeView extends ItemView {
 				cell.toggleClass('is-selected', key === this.selectedDay);
 				cell.onclick = () => {
 					this.selectedDay = key;
+					this.currentDay = dayKey();
 					this.render();
 				};
 			}
@@ -159,6 +179,7 @@ export class ActivityTreeView extends ItemView {
 			const targetDay = Math.min(selectedDate.date(), targetMonth.daysInMonth());
 			this.monthTimestamp = targetMonth.valueOf();
 			this.selectedDay = targetMonth.clone().date(targetDay).format(DAY_FORMAT);
+			this.currentDay = dayKey();
 			this.render();
 		};
 	}

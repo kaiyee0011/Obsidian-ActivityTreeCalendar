@@ -1,0 +1,15 @@
+{
+  "pluginId": "activity-tree-calendar",
+  "source": "https://raw.githubusercontent.com/obsidianmd/obsidian-releases/master/community-plugin-stats.json",
+  "observations": [
+    {
+      "date": "2026-09-14",
+      "downloads": 0,
+      "type": "release"
+    },
+    {
+      "date": "2026-10-23",
+      "downloads": 113
+    }
+  ]
+}

@@ -61,6 +61,8 @@ The darkest shade uses a fixed threshold so the visual scale stays understandabl
 
 Use the arrow buttons to switch months. Select a date to filter the file tree, then select a file to open it.
 
+Opening the calendar from the ribbon or command palette always selects **today** and shows the current month. While the calendar stays open, it follows the new day after midnight if today was selected; browsing a historical date keeps your selection.
+
 ## Settings
 
 Open **Settings → Community plugins → Activity Tree Calendar**.
@@ -108,15 +110,14 @@ Production checks:
 ```bash
 npm run build
 npm run lint
+npm test
 ```
 
-## Release
+## Download history
 
-Create a GitHub release whose tag exactly matches the plugin version without a `v` prefix. Attach:
+[![Download history for Activity Tree Calendar](assets/download-history-chart.svg)](https://community.obsidian.md/plugins/activity-tree-calendar)
 
-- `main.js`
-- `manifest.json`
-- `styles.css`
+Daily snapshots of the cumulative download count in [Obsidian's official statistics](https://raw.githubusercontent.com/obsidianmd/obsidian-releases/master/community-plugin-stats.json). Collection dates use UTC. The release baseline is **0 downloads on September 14, 2026**, provided by the maintainer.
 
 ## License
 
